@@ -1,0 +1,59 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencias de Node.js
+node_modules/
+npm-debug.log
+
+# Dependencias de Python
+__pycache__/
+*.py[cod]
+venv/
+
+# Dependencias de Java
+*.class
+*.jar
+*.war
+*.ear
+/target/
+
+# Dependencias de Ruby
+*.gem
+.bundle/
+
+# Archivos de entorno
+.env
+.env.local
+
+# Archivos de compilación
+/build/
+/dist/
+/out/
+
+# Archivos de bases de datos
+*.sqlite
+*.sqlite3
+*/data
+
+# Archivos de IDEs
+.vscode/
+.idea/
+*.iml
+
+# Archivos generados por el sistema de control de versiones
+*.swp
+*.swo
+
+# Archivos específicos de Docker
+.dockerignore
+
+# Otros
+*.bak
+*.tmp
