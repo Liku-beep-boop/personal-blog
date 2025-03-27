@@ -1,35 +1,69 @@
 import adminService from "../service/adminService.js";
+import jwt from 'jsonwebtoken'
+import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 
 const adminController = {
     login: async (req, res) => {
-        res.render("admin/login");
+        res.render("admin/adminLogin");
     },
-    register: async (req, res) => {
-        res.render("admin/register");
-    },
-    registerUser: async (req, res) => {
+    auth: async (req, res) => {
         const user = req.body;
-        const newAdmin = adminService.register(user);
-        console.log(newAdmin)
-        if (newAdmin) {
-            res.redirect("/admin/login");
-        } else {
-            res.render("admin/register", { error: "Registration failed" });
+        try {
+            const admin = adminService.login(user);
+
+            const token = jwt.sign({ 
+                id: admin._id, 
+                username: admin.username 
+                }, 
+                process.env.SECRET_JWT_KEY,
+                {
+                    expiresIn: '1h'
+                }
+            )
+
+            if (admin) {
+                res
+                    .cookie('access_token', token, {
+                        httpOnly: true,
+                        secure: process.env.NODE_ENV == 'production',
+                        sameSite: 'strict',
+                        maxAge: 1000 * 60 * 60
+                    })
+                    .redirect("/dashboard");
+            } else {
+                res.render("admin/adminLogin", { error: "Invalid username or password" });
+            }
+        } catch (error) {
+            res.status(401).send(error.message)
         }
     },
-    auth: (req, res) => {
-        const user = req.body;
-        const admin = adminService.auth(user);
-        if (admin) {
-            req.session.admin = admin;
-            res.render("admin/dashboard", { admin });
-        } else {
-            res.render("admin/login", { error: "Invalid username or password" });
+    register: async (req, res) => {
+        res.render("admin/adminRegister");
+    },
+    create: async (req, res) => {
+        try {
+
+            const user = { 
+                username: req.body.username, 
+                password: req.body.password
+            };
+
+            const newAdmin = adminService.create(user);
+
+            if (newAdmin) {
+                res.redirect("/home");
+            } else {
+                res.render("admin/adminregister", { error: "Registration failed" });
+            }
+
+        } catch (error) {
+            res.status(401).send(error.message)
         }
     },
     logout: (req, res) => {
         adminService.logout(req, res);
     },
+    
 }
 export default adminController;

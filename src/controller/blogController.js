@@ -1,4 +1,5 @@
 import blogService from "../service/blogService.js";
+import jwt from 'jsonwebtoken'
 
 const blogController = {
     getAllBlogs: async (req, res) => {
@@ -27,5 +28,18 @@ const blogController = {
         }
         res.render("article", { article: blog });
     },
+    getDashboard: async(req, res) =>{
+        const token = req.cookies.access_token
+        if(!token){
+            return res.status(403).send('Access not authorized')
+        }   
+        
+        try {
+            const data = jwt.verify(token, process.env.SECRET_JWT_KEY)
+            res.render('admin/dashboard', {data})
+        } catch (error) {
+            return res.status(401).send('Access not authorized')
+        }
+    }
 }
 export default blogController;

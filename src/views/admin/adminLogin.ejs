@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>Document</title>
     <style>
         *::before,
         *::after{
@@ -57,7 +56,7 @@
             border-radius: 4px;
         }
 
-        button{
+        button {
             width: 100%;
             padding: 10px;
             background-color: #28a745;
@@ -68,26 +67,24 @@
             font-size: 16px;
         }
 
-        button a{
-            text-decoration: none;
-            color: #fff
-            
-        }
-
         button:hover {
             background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <h2>Hola <%= data.username %>!</h2>
-            <p>Estas en el panel de administración</p>
-            <button id="close-session"><a href="/admin/logout">Cerrar sesión</a></button>
-        </div>
+    <div class="form-container">
+        <form id="login-form" action="/admin/login" method="POST">
+            <h2>Login</h2>
+            <label for="login-username">Username</label>
+            <input type="text" id="login-username" name="username" required>
+
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" name="password" required>
+
+            <button type="submit">Login</button>
+            <span>&nbsp;</span>
+        </form>
     </div>
-   <!--  <h1><%= data.username %></h1>
-    <button><a href="/admin/logout">Logout</a></button> -->
 </body>
 </html>

@@ -1,9 +1,8 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>Document</title>
     <style>
         *::before,
         *::after{
@@ -50,14 +49,14 @@
         }
 
         input{
-            width: 100%;
+            width: 90%;
             padding: 10px;
             margin-bottom: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
 
-        button{
+        button {
             width: 100%;
             padding: 10px;
             background-color: #28a745;
@@ -68,26 +67,48 @@
             font-size: 16px;
         }
 
-        button a{
-            text-decoration: none;
-            color: #fff
-            
-        }
-
         button:hover {
             background-color: #218838;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="form-container">
-            <h2>Hola <%= data.username %>!</h2>
-            <p>Estas en el panel de administración</p>
-            <button id="close-session"><a href="/admin/logout">Cerrar sesión</a></button>
-        </div>
+
+    <div class="form-container">
+        <form id="register-form" action="/admin/register" method="POST">
+            <h2>Register</h2>
+            <label for="register-username">Username</label>
+            <input type="text" id="register-username" name="username" required>
+        
+            <label for="register-password">Password</label>
+            <input type="password" id="register-password" name="password" required>
+            
+            <label for="register-confirm-password">Confirm Password</label>
+            <input type="password" id="register-confirm-password" name="confirm-password" required>
+            
+            <button type="submit">Register</button>
+        </form>
     </div>
-   <!--  <h1><%= data.username %></h1>
-    <button><a href="/admin/logout">Logout</a></button> -->
+    <script>
+        const $ = el => document.querySelector(el);
+    
+        const registerForm = $('#register-form');
+    
+        registerForm?.addEventListener('submit', e => {
+            e.preventDefault(); // Prevenir el envío del formulario
+    
+            const password = $('#register-password').value;
+            const confirmPassword = $('#register-confirm-password').value;
+    
+            // Verificar si las contraseñas coinciden
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return; // Detener el envío si no coinciden
+            }
+    
+            // Si las contraseñas coinciden, el formulario se enviará normalmente
+            registerForm.submit(); // Enviar el formulario normalmente
+        });
+    </script>
 </body>
 </html>
