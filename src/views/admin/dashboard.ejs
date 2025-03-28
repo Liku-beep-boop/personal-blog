@@ -117,8 +117,12 @@
                         <%= article.title %>
                     </a></span>
                     <div class="article-buttons">
-                        <button><a href="/admin/edit/<%= article.id %>">Editar</a></button>
-                        <button class="delete"><a href="/admin/delete/<%= article.id %>" onclick="return confirm('¿Estás seguro de que deseas eliminar esta entrada?');">Borrar</a></button>
+                        <button><a href="/edit/<%= article.id %>">Editar</a></button>
+
+                        <form action="/delete/<%= article.id %>/?_method=DELETE" method="POST" style="display:inline;">
+                            <button type="submit" class="delete" onclick="return confirm('¿Estás seguro de que deseas eliminar esta entrada?');">Borrar</button>
+                        </form>
+                        
                     </div>
                 </li>
             <% }); %>

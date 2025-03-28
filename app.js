@@ -15,7 +15,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser())
 
 app.use(express.static("public"));
-app.use(methodOverride("_method"));
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 app.set('views', path.join(path.resolve(), 'src/views'));
 /* app.use(
