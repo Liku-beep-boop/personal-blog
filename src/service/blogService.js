@@ -1,5 +1,6 @@
 import fs from 'fs';
 import { get } from 'http';
+import bcrypt from 'bcryptjs';
 
 const readData = () => {
   try {
@@ -22,6 +23,19 @@ const blogService = {
     if (!blog) return null;
     return blog;
   },
+  newBlog: async (blog) =>{
+    const blogs = readData();
+    const id = blogs.length > 0 ? Math.max(...blogs.map(blog => blog.id)) + 1 : 1;
+    const newBlog = {
+      id: id,
+      title: blog.title,
+      content: blog.content,
+      created_at: new Date()
+    }
+    blogs.push(newBlog);
+    fs.writeFileSync("src/data/blogs.json", JSON.stringify(blogs), 'utf-8');
+    return newBlog;
+  }
 }
 
 export default blogService;

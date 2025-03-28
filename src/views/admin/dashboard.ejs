@@ -1,93 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
+    <title>Admin Dashboard</title>
     <style>
-        *::before,
-        *::after{
+        * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-          background-color: #020617;
-          color: #dcdcdc;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          height: 100vh;
-          margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #020617;
+            color: #dcdcdc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .form-container {
+            width: 80%;
+            max-width: 800px;
             background-color: #0b1021;
             padding: 20px;
-            margin: 10px;
-            border: 1px solid #ffffff1a;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            width: 300px;
-        }
-
-        form h2{
-            margin-bottom: 20px;
-            font-size: 24px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             text-align: center;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+        h2 {
+            margin-bottom: 15px;
         }
 
-        input{
-            width: 100%;
-            padding: 10px;
+        p {
             margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
         }
 
-        button{
-            width: 100%;
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        button {
             padding: 10px;
             background-color: #28a745;
-            color: #fff;
+            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
         }
 
-        button a{
+        button a {
             text-decoration: none;
-            color: #fff
-            
+            color: white;
         }
 
         button:hover {
             background-color: #218838;
         }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #1a1e33;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .article-buttons button {
+            margin-left: 10px;
+            background-color: #007bff;
+        }
+
+        .article-buttons .delete {
+            background-color: #dc3545;
+        }
+
+        .article-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        .article-buttons .delete:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="form-container">
-            <h2>Hola <%= data.username %>!</h2>
-            <p>Estas en el panel de administración</p>
-            <button id="close-session"><a href="/admin/logout">Cerrar sesión</a></button>
+        <h2>Hola <%= data.username %>!</h2>
+        <p>Bienvenido al panel de administración</p>
+        
+        <div class="button-container">
+            <button><a href="/admin/logout">Cerrar sesión</a></button>
+            <button><a href="/new">Crear Nuevo Blog</a></button>
         </div>
+        
+        <ul>
+            <% articles.forEach(article => { %>
+                <li>
+                    <span><a href="/blog/<%= article.id %>" style="color: #007bff; font-weight: bold; text-decoration: none;">
+                        <%= article.title %>
+                    </a></span>
+                    <div class="article-buttons">
+                        <button><a href="/admin/edit/<%= article.id %>">Editar</a></button>
+                        <button class="delete"><a href="/admin/delete/<%= article.id %>" onclick="return confirm('¿Estás seguro de que deseas eliminar esta entrada?');">Borrar</a></button>
+                    </div>
+                </li>
+            <% }); %>
+        </ul>
     </div>
-   <!--  <h1><%= data.username %></h1>
-    <button><a href="/admin/logout">Logout</a></button> -->
 </body>
+
 </html>
