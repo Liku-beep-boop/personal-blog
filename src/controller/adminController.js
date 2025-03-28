@@ -5,7 +5,11 @@ import bodyParser from "body-parser";
 
 const adminController = {
     login: async (req, res) => {
-        res.render("admin/adminLogin");
+        const token = req.cookies.access_token
+        if(!token){
+            return res.render("admin/adminLogin");
+        } return res.redirect("/admin")
+        
     },
     auth: async (req, res) => {
         const user = req.body;
@@ -30,7 +34,7 @@ const adminController = {
                         sameSite: 'strict',
                         maxAge: 1000 * 60 * 60
                     })
-                    .redirect("/dashboard");
+                    .redirect("/admin");
             } else {
                 res.render("admin/adminLogin", { error: "Invalid username or password" });
             }
