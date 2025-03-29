@@ -40,7 +40,6 @@ venv/
 # Archivos de bases de datos
 *.sqlite
 *.sqlite3
-*/data
 
 # Archivos de IDEs
 .vscode/

@@ -1,0 +1,14 @@
+[
+  {
+    "id": 2,
+    "title": "Cómo construir una API REST con Express",
+    "content": "Express es un framework minimalista para Node.js que facilita la creación de servidores...",
+    "created_at": "2025-03-21T15:30:00Z"
+  },
+  {
+    "id": 3,
+    "title": "Mejores prácticas para el desarrollo backend",
+    "content": "El desarrollo backend requiere buenas prácticas como modularidad, seguridad y pruebas...",
+    "created_at": "2025-03-20T08:45:00Z"
+  }
+]

@@ -5,7 +5,7 @@ import { BlockList } from "net";
 
 const router = express.Router();
 
-router.get("/home", blogController.home);
+router.get("/", blogController.home);
 router.get("/blog/:id", blogController.getBlogById);
 
 router.get("/admin", blogController.getDashboard)
