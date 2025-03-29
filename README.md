@@ -1,6 +1,7 @@
 # Personal Blog
 
 This is a personal blog project based on the guide from [roadmap.sh](https://roadmap.sh/projects/personal-blog). It uses Node.js and Express as the backend framework, along with other tools for authentication management and dynamic views.
+[Deploy](https://personal-blog-k4rp.onrender.com)
 
 ## Technologies and Dependencies
 
